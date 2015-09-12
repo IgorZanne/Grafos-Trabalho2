@@ -50,9 +50,13 @@
     <Compile Include="Estruturas\Aresta.cs" />
     <Compile Include="Estruturas\CoresEnum.cs" />
     <Compile Include="Estruturas\Grafo.cs" />
+    <Compile Include="Estruturas\GrafoTsp.cs" />
+    <Compile Include="Estruturas\Ponto.cs" />
     <Compile Include="Estruturas\Vertice.cs" />
+    <Compile Include="Estruturas\VerticeTsp.cs" />
     <Compile Include="Factory.cs" />
     <Compile Include="Helpers\GrafoHelper.cs" />
+    <Compile Include="Helpers\MontaRetorno.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

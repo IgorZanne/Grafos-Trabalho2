@@ -15,6 +15,7 @@ namespace Grafo2.Estruturas
             this.Cor = CoresEnum.Branco;
             this.Pai = null;
             this.Adjacentes = new Dictionary<string, Vertice>();
+            this.AdjacentesDir = new Dictionary<string, Vertice>();
         }
 
         public CoresEnum Cor {get; set;}
@@ -23,5 +24,6 @@ namespace Grafo2.Estruturas
         public int Descoberta { get; set; }
         public int Finalizacao { get; set; }
         public Dictionary<string, Vertice> Adjacentes { get; set; }
+        public Dictionary<string, Vertice> AdjacentesDir { get; set; }
     }
 }

@@ -11,12 +11,22 @@ namespace Grafo2.Estruturas
     {
         public bool Direcionado { get; set; }
         public List<Aresta> Arestas { get; set; }
+        public List<Aresta> ArestasDir { get; set; }
 
         public Dictionary<string, Vertice> Vertices { get; set; }
 
         public Dictionary<string, Vertice> GetAdj(string vertice)
         {
-            return Vertices[vertice].Adjacentes;
+            return this.Direcionado 
+                ? Vertices[vertice].Adjacentes
+                : Vertices[vertice].Adjacentes
+                    .Concat(Vertices[vertice].AdjacentesDir)
+                    .ToDictionary(e => e.Key, v => v.Value);
+        }
+
+        public IEnumerable<Aresta> GetArestas()
+        {
+            return this.Arestas.Concat(this.ArestasDir);
         }
 
         public Grafo()
@@ -24,6 +34,7 @@ namespace Grafo2.Estruturas
             this.Direcionado = true;
             this.Vertices = new Dictionary<string, Vertice>();
             this.Arestas = new List<Aresta>();
+            this.ArestasDir = new List<Aresta>();
         }
 
         public Grafo(bool direcionado)
@@ -31,6 +42,7 @@ namespace Grafo2.Estruturas
             this.Direcionado = direcionado;
             this.Vertices = new Dictionary<string, Vertice>();
             this.Arestas = new List<Aresta>();
+            this.ArestasDir = new List<Aresta>();
         }
     }
 }

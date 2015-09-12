@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Grafo2.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,8 +9,9 @@ namespace Grafo2.Algoritmos
 {
     public class TspMst2Opt : Algoritmo
     {
-        public override IEnumerable<string> Executar(Estruturas.Grafo grafo)
+        public override IEnumerable<string> Executar(string arquivo)
         {
+            var grafo = GrafoHelper.LerTsp(arquivo);
             throw new NotImplementedException();
         }
     }

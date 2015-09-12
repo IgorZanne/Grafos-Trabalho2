@@ -9,6 +9,6 @@ namespace Grafo2.Algoritmos
 {
     public abstract class Algoritmo
     {
-        public abstract IEnumerable<string> Executar(Grafo grafo);
+        public abstract IEnumerable<string> Executar(string arquivo);
     }
 }

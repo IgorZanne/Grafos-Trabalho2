@@ -40,10 +40,16 @@ namespace Grafo2.Helpers
                         var origem = retorno.Vertices[carac[0]];
                         var destino = retorno.Vertices[carac[1]];
                         origem.Adjacentes.Add(destino.Id, destino);
+                        destino.AdjacentesDir.Add(origem.Id, origem);
                         var aresta = new Aresta(carac[0], carac[1]);
-                        if (tamanho > 2) 
+                        var arestaDir = new Aresta(carac[1], carac[0]);
+                        if (tamanho > 2)
+                        {
                             aresta.Peso = Convert.ToInt16(carac[2]);
+                            arestaDir.Peso = Convert.ToInt16(carac[2]);
+                        }
                         retorno.Arestas.Add(aresta);
+                        retorno.ArestasDir.Add(arestaDir);
                     }
                 }
             }
@@ -51,21 +57,27 @@ namespace Grafo2.Helpers
             return retorno;
         }
 
-        public static Grafo GetTransposto(Grafo grafo)
+        public static GrafoTsp LerTsp(string caminhoArquivo)
         {
-            var novaListaAresta = new List<Aresta>();
-            foreach (var aresta in grafo.Arestas)
-            {
-                if (grafo.Vertices[aresta.Origem].Adjacentes.ContainsKey(aresta.Destino))
-                    grafo.Vertices[aresta.Origem].Adjacentes.Remove(aresta.Destino);
-                if (grafo.Vertices[aresta.Destino].Adjacentes.ContainsKey(aresta.Origem))
-                    grafo.Vertices[aresta.Destino].Adjacentes.Remove(aresta.Origem);
-                grafo.Vertices[aresta.Destino].Adjacentes.Add(aresta.Origem, grafo.Vertices[aresta.Origem]);
+            var arquivo = File.ReadAllLines(caminhoArquivo);
+            var retorno = new GrafoTsp(arquivo.Length);
 
-                novaListaAresta.Add(new Aresta(aresta.Destino, aresta.Origem));
+            foreach (var linha in arquivo)
+            {
+                try
+                {
+                    var split = linha.Trim().Split(' ');
+                    var ponto = new Ponto(Convert.ToDouble(split[1]), Convert.ToDouble(split[2]));
+                    var vertice = new VerticeTsp(Convert.ToInt32(split[0]), ponto);
+                    retorno.Vertices.Add(Convert.ToInt32(split[0]), vertice);
+                }
+                catch (Exception e)
+                {
+                    throw new Exception(String.Format("Erro ao tratar linha: '{0}' . Mensagem de erro: {1}", linha, e.Message));
+                }
             }
-            grafo.Arestas = novaListaAresta;
-            return grafo;
+
+            return retorno;
         }
     }
 }
