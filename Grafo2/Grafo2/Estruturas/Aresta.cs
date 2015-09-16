@@ -8,7 +8,7 @@ namespace Grafo2.Estruturas
 {
     public class Aresta
     {
-        public Aresta(string origem, string destino)
+        public Aresta(Vertice origem, Vertice destino)
         {
             this.Origem = origem;
             this.Destino = destino;
@@ -16,7 +16,7 @@ namespace Grafo2.Estruturas
             this.Visitado = false;
         }
 
-        public Aresta(string origem, string destino, int peso)
+        public Aresta(Vertice origem, Vertice destino, int peso)
         {
             this.Origem = origem;
             this.Destino = destino;
@@ -25,8 +25,8 @@ namespace Grafo2.Estruturas
         }
 
         public int Peso { get; set; }
-        public string Origem { get; set; }
-        public string Destino { get; set; }
+        public Vertice Origem { get; set; }
+        public Vertice Destino { get; set; }
         public bool Visitado { get; set; }
     }
 }

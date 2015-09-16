@@ -20,23 +20,29 @@ namespace Grafo2.Algoritmos
 
         private List<Vertice> ExecutarEc(Grafo grafo)
         {
-            //var v = grafo.Vertices.First();
-            //var s = new Stack<Vertice>();
-            //s.Push(v.Value);
-            //var C = new List<Vertice>();
-            //while (s.Any())
-            //{
-            //    var u = s.Pop();
-            //    C.Insert(0, u);
-            //    //
-            //    while (u.Adjacentes.Any())
-            //    {
-            //        s.Push(u);
-            //        u.Adjacentes
-            //    }
-            //}
+            var pilha = new Stack<Vertice>();
+            var retorno = new List<Vertice>();
+            var inicial = grafo.Vertices.First().Value;
+            pilha.Push(inicial);
 
-            throw new NotImplementedException();
+            while (pilha.Any())
+            {
+                var u = pilha.Pop();
+                retorno.Insert(0, u);
+                while (grafo.GetAdj(u.Id).Any())
+                {
+                    pilha.Push(u);
+                    var v = grafo.GetAdj(u.Id).First();
+
+                    var tupla = new Tuple<Vertice, Vertice>(u, v);
+                    var arestas = grafo.ArestasDoVertice[tupla];
+                    grafo.RemoveAresta(arestas);
+
+                    u = v;
+                }
+            }
+
+            return retorno;
         }
     }
 }

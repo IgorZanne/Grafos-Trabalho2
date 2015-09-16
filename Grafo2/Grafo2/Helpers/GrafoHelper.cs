@@ -26,7 +26,7 @@ namespace Grafo2.Helpers
                 if (primeiraParte) 
                 {
                     var vertice = new Vertice(linha);
-                    retorno.Vertices.Add(linha, vertice);
+                    retorno.AdicionaVertice(vertice);
                 }
                 else
                 {
@@ -39,17 +39,12 @@ namespace Grafo2.Helpers
                     {
                         var origem = retorno.Vertices[carac[0]];
                         var destino = retorno.Vertices[carac[1]];
-                        origem.Adjacentes.Add(destino.Id, destino);
-                        destino.AdjacentesDir.Add(origem.Id, origem);
-                        var aresta = new Aresta(carac[0], carac[1]);
-                        var arestaDir = new Aresta(carac[1], carac[0]);
+                        retorno.Adjacentes[origem.Id].Add(destino);
+                        retorno.Adjacentes[destino.Id].Add(origem);
+                        var aresta = new Aresta(origem, destino);
                         if (tamanho > 2)
-                        {
                             aresta.Peso = Convert.ToInt16(carac[2]);
-                            arestaDir.Peso = Convert.ToInt16(carac[2]);
-                        }
-                        retorno.Arestas.Add(aresta);
-                        retorno.ArestasDir.Add(arestaDir);
+                        retorno.AdicionaAresta(aresta);
                     }
                 }
             }
@@ -76,6 +71,7 @@ namespace Grafo2.Helpers
                     throw new Exception(String.Format("Erro ao tratar linha: '{0}' . Mensagem de erro: {1}", linha, e.Message));
                 }
             }
+
 
             return retorno;
         }
