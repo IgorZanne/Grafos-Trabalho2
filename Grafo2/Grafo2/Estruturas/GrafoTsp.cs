@@ -15,7 +15,6 @@ namespace Grafo2.Estruturas
         {
             this.Vertices = new Dictionary<int, VerticeTsp>();
             this.MatrizDistancias = new int[tamanho+1, tamanho+1];
-            //this.MatrizDistancias = new int[tamanho, tamanho];
         }
 
         public void PreencherMatriz()

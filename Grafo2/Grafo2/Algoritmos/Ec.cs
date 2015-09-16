@@ -12,10 +12,17 @@ namespace Grafo2.Algoritmos
     {
         public override IEnumerable<string> Executar(string arquivo)
         {
-            var grafo = GrafoHelper.Ler(arquivo);
-            var ciclo = ExecutarEc(grafo);
+            try
+            {
+                var grafo = GrafoHelper.Ler(arquivo);
+                var ciclo = ExecutarEc(grafo);
 
-            return MontaRetorno.GerarRetornoHierholzer(ciclo);
+                return MontaRetorno.GerarRetornoHierholzer(ciclo);
+            }
+            catch (Exception)
+            {   
+                throw;
+            }
         }
 
         private List<Vertice> ExecutarEc(Grafo grafo)

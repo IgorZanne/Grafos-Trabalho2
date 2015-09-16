@@ -23,7 +23,7 @@ namespace Grafo2
                 {
                     Console.WriteLine(item);
                 }
-                Console.ReadKey();
+                //Console.ReadKey();
             }
             catch (Exception e)
             {
