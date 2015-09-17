@@ -16,7 +16,7 @@ namespace Grafo2.Algoritmos
             {
                 var grafo = GrafoHelper.LerTsp(arquivo);
                 grafo.PreencherMatriz();
-                var caminho = ExecutarTspNn(ref grafo);
+                var caminho = ExecutarTspNn(grafo);
 
                 return MontaRetorno.GerarRetornoTsp(caminho, grafo);
             }
@@ -26,7 +26,7 @@ namespace Grafo2.Algoritmos
             }
         }
 
-        public List<VerticeTsp> ExecutarTspNn(ref GrafoTsp grafo)
+        public List<VerticeTsp> ExecutarTspNn(GrafoTsp grafo)
         {
             VerticeTsp proximo = null;
             int chave = 0;
